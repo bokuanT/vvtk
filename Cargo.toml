@@ -59,6 +59,8 @@ serde = { version = "1", features = ["derive"], optional = true }
 serde_with = { version = "2", optional = true }
 quick-xml = { version = "0.25", features = ["serialize"], optional = true }
 crossbeam-channel = "0.5.6"
+nalgebra = "0.32.2"
+poisson_reconstruction = "0.1"
 
 [dev-dependencies]
 criterion = "0.3"
