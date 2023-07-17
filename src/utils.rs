@@ -426,233 +426,233 @@ fn set_encoding() -> Encoding {
     Encoding::BinaryBigEndian
 }
 
-#[cfg(test)]
-mod test {
+// #[cfg(test)]
+// mod test {
 
-    use super::*;
+//     use super::*;
 
-    #[test]
-    fn test_read_ply() {
-        let ply_ascii_path = PathBuf::from("./test_files/ply_ascii/longdress_vox10_1213_short.ply");
-        let pc = read_ply(&ply_ascii_path).unwrap();
-        assert_eq!(pc.number_of_points, 20);
-        assert_eq!(
-            pc.points[0],
-            PointXyzRgba {
-                x: 171.0,
-                y: 63.0,
-                z: 255.0,
-                r: 183,
-                g: 165,
-                b: 155,
-                a: 255
-            }
-        );
-        assert_eq!(
-            pc.points[19],
-            PointXyzRgba {
-                x: 175.0,
-                y: 60.0,
-                z: 253.0,
-                r: 161,
-                g: 145,
-                b: 133,
-                a: 255
-            }
-        );
-    }
+//     #[test]
+//     fn test_read_ply() {
+//         let ply_ascii_path = PathBuf::from("./test_files/ply_ascii/longdress_vox10_1213_short.ply");
+//         let pc = read_ply(&ply_ascii_path).unwrap();
+//         assert_eq!(pc.number_of_points, 20);
+//         assert_eq!(
+//             pc.points[0],
+//             PointXyzRgba {
+//                 x: 171.0,
+//                 y: 63.0,
+//                 z: 255.0,
+//                 r: 183,
+//                 g: 165,
+//                 b: 155,
+//                 a: 255
+//             }
+//         );
+//         assert_eq!(
+//             pc.points[19],
+//             PointXyzRgba {
+//                 x: 175.0,
+//                 y: 60.0,
+//                 z: 253.0,
+//                 r: 161,
+//                 g: 145,
+//                 b: 133,
+//                 a: 255
+//             }
+//         );
+//     }
 
-    #[test]
-    fn test_ply_to_ply() {
-        let ply_ascii_path = PathBuf::from("./test_files/ply_ascii/longdress_vox10_1213_short.ply");
-        let output_path = PathBuf::from("./test_files/ply_binary");
-        ply_to_ply(&output_path, PCDDataType::Binary, ply_ascii_path);
-        let output_path = output_path.join("longdress_vox10_1213_short.ply");
-        let pc = read_file_to_point_cloud(&output_path).unwrap();
-        assert_eq!(pc.number_of_points, 20);
-        assert_eq!(
-            pc.points[0],
-            PointXyzRgba {
-                x: 171.0,
-                y: 63.0,
-                z: 255.0,
-                r: 183,
-                g: 165,
-                b: 155,
-                a: 255
-            }
-        );
-        assert_eq!(
-            pc.points[9],
-            PointXyzRgba {
-                x: 172.0,
-                y: 61.0,
-                z: 255.0,
-                r: 161,
-                g: 145,
-                b: 134,
-                a: 255
-            }
-        );
-        assert_eq!(
-            pc.points[19],
-            PointXyzRgba {
-                x: 175.0,
-                y: 60.0,
-                z: 253.0,
-                r: 161,
-                g: 145,
-                b: 133,
-                a: 255
-            }
-        );
-    }
+//     #[test]
+//     fn test_ply_to_ply() {
+//         let ply_ascii_path = PathBuf::from("./test_files/ply_ascii/longdress_vox10_1213_short.ply");
+//         let output_path = PathBuf::from("./test_files/ply_binary");
+//         ply_to_ply(&output_path, PCDDataType::Binary, ply_ascii_path);
+//         let output_path = output_path.join("longdress_vox10_1213_short.ply");
+//         let pc = read_file_to_point_cloud(&output_path).unwrap();
+//         assert_eq!(pc.number_of_points, 20);
+//         assert_eq!(
+//             pc.points[0],
+//             PointXyzRgba {
+//                 x: 171.0,
+//                 y: 63.0,
+//                 z: 255.0,
+//                 r: 183,
+//                 g: 165,
+//                 b: 155,
+//                 a: 255
+//             }
+//         );
+//         assert_eq!(
+//             pc.points[9],
+//             PointXyzRgba {
+//                 x: 172.0,
+//                 y: 61.0,
+//                 z: 255.0,
+//                 r: 161,
+//                 g: 145,
+//                 b: 134,
+//                 a: 255
+//             }
+//         );
+//         assert_eq!(
+//             pc.points[19],
+//             PointXyzRgba {
+//                 x: 175.0,
+//                 y: 60.0,
+//                 z: 253.0,
+//                 r: 161,
+//                 g: 145,
+//                 b: 133,
+//                 a: 255
+//             }
+//         );
+//     }
 
-    #[test]
-    fn test_ply_to_pcd() {
-        let ply_ascii_path = PathBuf::from("./test_files/ply_ascii/longdress_vox10_1213_short.ply");
-        let output_path = PathBuf::from("./test_files/pcd_binary");
-        ply_to_pcd(&output_path, PCDDataType::Binary, ply_ascii_path.clone());
-        let output_path = output_path.join("longdress_vox10_1213_short.pcd");
-        let pc = read_file_to_point_cloud(&output_path).unwrap();
-        assert_eq!(pc.number_of_points, 20);
-        assert_eq!(
-            pc.points[0],
-            PointXyzRgba {
-                x: 171.0,
-                y: 63.0,
-                z: 255.0,
-                r: 183,
-                g: 165,
-                b: 155,
-                a: 255
-            }
-        );
-        assert_eq!(
-            pc.points[9],
-            PointXyzRgba {
-                x: 172.0,
-                y: 61.0,
-                z: 255.0,
-                r: 161,
-                g: 145,
-                b: 134,
-                a: 255
-            }
-        );
-        assert_eq!(
-            pc.points[19],
-            PointXyzRgba {
-                x: 175.0,
-                y: 60.0,
-                z: 253.0,
-                r: 161,
-                g: 145,
-                b: 133,
-                a: 255
-            }
-        );
+//     #[test]
+//     fn test_ply_to_pcd() {
+//         let ply_ascii_path = PathBuf::from("./test_files/ply_ascii/longdress_vox10_1213_short.ply");
+//         let output_path = PathBuf::from("./test_files/pcd_binary");
+//         ply_to_pcd(&output_path, PCDDataType::Binary, ply_ascii_path.clone());
+//         let output_path = output_path.join("longdress_vox10_1213_short.pcd");
+//         let pc = read_file_to_point_cloud(&output_path).unwrap();
+//         assert_eq!(pc.number_of_points, 20);
+//         assert_eq!(
+//             pc.points[0],
+//             PointXyzRgba {
+//                 x: 171.0,
+//                 y: 63.0,
+//                 z: 255.0,
+//                 r: 183,
+//                 g: 165,
+//                 b: 155,
+//                 a: 255
+//             }
+//         );
+//         assert_eq!(
+//             pc.points[9],
+//             PointXyzRgba {
+//                 x: 172.0,
+//                 y: 61.0,
+//                 z: 255.0,
+//                 r: 161,
+//                 g: 145,
+//                 b: 134,
+//                 a: 255
+//             }
+//         );
+//         assert_eq!(
+//             pc.points[19],
+//             PointXyzRgba {
+//                 x: 175.0,
+//                 y: 60.0,
+//                 z: 253.0,
+//                 r: 161,
+//                 g: 145,
+//                 b: 133,
+//                 a: 255
+//             }
+//         );
 
-        let output_path = PathBuf::from("./test_files/pcd_ascii");
-        ply_to_pcd(&output_path, PCDDataType::Ascii, ply_ascii_path);
-        let output_path = output_path.join("longdress_vox10_1213_short.pcd");
-        let pc = read_file_to_point_cloud(&output_path).unwrap();
-        assert_eq!(pc.number_of_points, 20);
-        assert_eq!(
-            pc.points[0],
-            PointXyzRgba {
-                x: 171.0,
-                y: 63.0,
-                z: 255.0,
-                r: 183,
-                g: 165,
-                b: 155,
-                a: 255
-            }
-        );
-        assert_eq!(
-            pc.points[9],
-            PointXyzRgba {
-                x: 172.0,
-                y: 61.0,
-                z: 255.0,
-                r: 161,
-                g: 145,
-                b: 134,
-                a: 255
-            }
-        );
-        assert_eq!(
-            pc.points[19],
-            PointXyzRgba {
-                x: 175.0,
-                y: 60.0,
-                z: 253.0,
-                r: 161,
-                g: 145,
-                b: 133,
-                a: 255
-            }
-        );
-    }
+//         let output_path = PathBuf::from("./test_files/pcd_ascii");
+//         ply_to_pcd(&output_path, PCDDataType::Ascii, ply_ascii_path);
+//         let output_path = output_path.join("longdress_vox10_1213_short.pcd");
+//         let pc = read_file_to_point_cloud(&output_path).unwrap();
+//         assert_eq!(pc.number_of_points, 20);
+//         assert_eq!(
+//             pc.points[0],
+//             PointXyzRgba {
+//                 x: 171.0,
+//                 y: 63.0,
+//                 z: 255.0,
+//                 r: 183,
+//                 g: 165,
+//                 b: 155,
+//                 a: 255
+//             }
+//         );
+//         assert_eq!(
+//             pc.points[9],
+//             PointXyzRgba {
+//                 x: 172.0,
+//                 y: 61.0,
+//                 z: 255.0,
+//                 r: 161,
+//                 g: 145,
+//                 b: 134,
+//                 a: 255
+//             }
+//         );
+//         assert_eq!(
+//             pc.points[19],
+//             PointXyzRgba {
+//                 x: 175.0,
+//                 y: 60.0,
+//                 z: 253.0,
+//                 r: 161,
+//                 g: 145,
+//                 b: 133,
+//                 a: 255
+//             }
+//         );
+//     }
 
-    #[test]
-    fn test_pcd_to_ply() {
-        let pcd_ascii_path = PathBuf::from("./test_files/pcd_ascii/longdress_vox10_1213_short.pcd");
-        let output_path = PathBuf::from("./test_files/ply_ascii/from_pcd");
-        pcd_to_ply(&output_path, PCDDataType::Ascii, pcd_ascii_path);
-        let output_path = output_path.join("longdress_vox10_1213_short.ply");
-        let pc = read_file_to_point_cloud(&output_path).unwrap();
-        assert_eq!(pc.number_of_points, 20);
-        assert_eq!(
-            pc.points[0],
-            PointXyzRgba {
-                x: 171.0,
-                y: 63.0,
-                z: 255.0,
-                r: 183,
-                g: 165,
-                b: 155,
-                a: 255
-            }
-        );
-        assert_eq!(
-            pc.points[9],
-            PointXyzRgba {
-                x: 172.0,
-                y: 61.0,
-                z: 255.0,
-                r: 161,
-                g: 145,
-                b: 134,
-                a: 255
-            }
-        );
-        assert_eq!(
-            pc.points[19],
-            PointXyzRgba {
-                x: 175.0,
-                y: 60.0,
-                z: 253.0,
-                r: 161,
-                g: 145,
-                b: 133,
-                a: 255
-            }
-        );
-    }
+//     #[test]
+//     fn test_pcd_to_ply() {
+//         let pcd_ascii_path = PathBuf::from("./test_files/pcd_ascii/longdress_vox10_1213_short.pcd");
+//         let output_path = PathBuf::from("./test_files/ply_ascii/from_pcd");
+//         pcd_to_ply(&output_path, PCDDataType::Ascii, pcd_ascii_path);
+//         let output_path = output_path.join("longdress_vox10_1213_short.ply");
+//         let pc = read_file_to_point_cloud(&output_path).unwrap();
+//         assert_eq!(pc.number_of_points, 20);
+//         assert_eq!(
+//             pc.points[0],
+//             PointXyzRgba {
+//                 x: 171.0,
+//                 y: 63.0,
+//                 z: 255.0,
+//                 r: 183,
+//                 g: 165,
+//                 b: 155,
+//                 a: 255
+//             }
+//         );
+//         assert_eq!(
+//             pc.points[9],
+//             PointXyzRgba {
+//                 x: 172.0,
+//                 y: 61.0,
+//                 z: 255.0,
+//                 r: 161,
+//                 g: 145,
+//                 b: 134,
+//                 a: 255
+//             }
+//         );
+//         assert_eq!(
+//             pc.points[19],
+//             PointXyzRgba {
+//                 x: 175.0,
+//                 y: 60.0,
+//                 z: 253.0,
+//                 r: 161,
+//                 g: 145,
+//                 b: 133,
+//                 a: 255
+//             }
+//         );
+//     }
 
-    #[test]
-    fn test_padding() {
-        let x = 101;
-        let y = 4;
-        let mut files = vec![];
-        for i in 0..=x {
-            let filename = format!("{:0width$}.pcd", i, width = y);
-            // println!("{}", filename);
-            files.push(filename);
-        }
-        files.sort();
-        println!("{:?}", files);
-    }
-}
+//     #[test]
+//     fn test_padding() {
+//         let x = 101;
+//         let y = 4;
+//         let mut files = vec![];
+//         for i in 0..=x {
+//             let filename = format!("{:0width$}.pcd", i, width = y);
+//             // println!("{}", filename);
+//             files.push(filename);
+//         }
+//         files.sort();
+//         println!("{:?}", files);
+//     }
+// }

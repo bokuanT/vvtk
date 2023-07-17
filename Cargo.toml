@@ -88,3 +88,6 @@ dash = ["dep:reqwest", "dep:regex", "dep:tempfile", "dep:serde", "dep:serde_with
 [[bench]]
 name = "reader"
 harness = false
+
+[build-dependencies]
+bindgen = "0.66.1"
